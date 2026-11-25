@@ -48,6 +48,18 @@ class MainActivity : ComponentActivity() {
             } catch (e: Exception) {
                 Log.e("ViajeTest", "Error al consultar Public Holiday API", e)
             }
+
+            try {
+                val tasas = repository.obtenerTasas("BOB")
+                Log.d("ViajeTest", "Tasas BOB (actualizadas ${tasas.ultimaActualizacion}): ${tasas.tasas.size} monedas")
+
+                val enDolares = repository.convertir(1000.0, "BOB", "USD")
+                Log.d("ViajeTest", "1000 BOB = $enDolares USD")
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Log.e("ViajeTest", "Error al consultar Exchange Rate API", e)
+            }
         }
     }
 }
