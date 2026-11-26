@@ -6,7 +6,7 @@ import retrofit2.http.Path
 interface ExchangeRateApiService {
 
     @GET("latest/{baseCode}")
-    suspend fun getTasas(
+    suspend fun getLatestRates(
         @Path("baseCode") baseCode: String
     ): ExchangeRateDto
 

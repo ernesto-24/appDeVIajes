@@ -2,10 +2,6 @@ package com.example.appdeviajes.data.remote.restcountries
 
 import com.google.gson.annotations.SerializedName
 
-// DTOs de REST Countries API (v5): https://api.restcountries.com/countries/v5/...
-// Documentación: https://restcountries.com/docs/countries
-// La respuesta viene envuelta en {"data":{"objects":[ ... ]}}.
-
 data class RestCountriesResponseDto(
     @SerializedName("data") val data: RestCountriesDataDto?
 )
@@ -23,8 +19,7 @@ data class CountryDto(
 )
 
 data class CountryNamesDto(
-    @SerializedName("common") val common: String?,
-    @SerializedName("official") val official: String?
+    @SerializedName("common") val common: String?
 )
 
 data class CountryCodesDto(
@@ -33,7 +28,12 @@ data class CountryCodesDto(
 )
 
 data class CapitalDto(
-    @SerializedName("name") val name: String?
+    @SerializedName("name") val name: String?,
+    @SerializedName("attributes") val attributes: CapitalAttributesDto?
+)
+
+data class CapitalAttributesDto(
+    @SerializedName("primary") val primary: Boolean?
 )
 
 data class LanguageDto(

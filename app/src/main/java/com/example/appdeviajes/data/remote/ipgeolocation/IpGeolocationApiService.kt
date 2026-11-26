@@ -6,12 +6,12 @@ import retrofit2.http.Query
 interface IpGeolocationApiService {
 
     @GET("./")
-    suspend fun getUbicacionActual(
+    suspend fun getCurrentLocation(
         @Query("key") apiKey: String? = null
     ): IpGeolocationDto
 
     @GET("./")
-    suspend fun getUbicacionPorIp(
+    suspend fun getLocationByIp(
         @Query("ip") ip: String,
         @Query("key") apiKey: String? = null
     ): IpGeolocationDto

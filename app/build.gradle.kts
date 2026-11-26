@@ -25,7 +25,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // API key de REST Countries: se define en local.properties (no se sube al repo)
         val restCountriesKey = localProperties.getProperty("RESTCOUNTRIES_API_KEY", "")
         buildConfigField("String", "RESTCOUNTRIES_API_KEY", "\"$restCountriesKey\"")
     }
@@ -57,6 +56,10 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp)

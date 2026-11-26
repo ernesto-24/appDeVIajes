@@ -2,8 +2,6 @@ package com.example.appdeviajes.data.remote.exchangerate
 
 import com.google.gson.annotations.SerializedName
 
-// Respuesta de https://open.er-api.com/v6/latest/{baseCode} (campos verificados con una petición real).
-// En error solo llegan "result" y "error-type", por eso el resto es nullable.
 data class ExchangeRateDto(
     @SerializedName("result") val result: String,
     @SerializedName("error-type") val errorType: String?,
