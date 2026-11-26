@@ -10,6 +10,7 @@ import com.example.appdeviajes.data.model.FinDeSemanaLargo
 import com.example.appdeviajes.data.model.Moneda
 import com.example.appdeviajes.data.model.OrigenViaje
 import com.example.appdeviajes.data.model.Pais
+import com.example.appdeviajes.data.model.Personaje
 import com.example.appdeviajes.data.model.TasaDeCambio
 import com.example.appdeviajes.data.model.UbicacionUsuario
 import com.example.appdeviajes.data.model.toDomain
@@ -18,6 +19,7 @@ import com.example.appdeviajes.data.remote.exchangerate.ExchangeRateApiService
 import com.example.appdeviajes.data.remote.ipgeolocation.IpGeolocationApiService
 import com.example.appdeviajes.data.remote.publicholiday.PublicHolidayApiService
 import com.example.appdeviajes.data.remote.restcountries.RestCountriesApiService
+import com.example.appdeviajes.data.remote.rickandmorty.RickAndMortyApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -39,6 +41,8 @@ class ViajeRepository(
         RetrofitClient.createService(ExchangeRateApiService.BASE_URL),
     private val ipGeolocationApi: IpGeolocationApiService =
         RetrofitClient.createService(IpGeolocationApiService.BASE_URL),
+    private val rickAndMortyApi: RickAndMortyApiService =
+        RetrofitClient.createService(RickAndMortyApiService.BASE_URL),
     private val restCountriesApiKey: String = BuildConfig.RESTCOUNTRIES_API_KEY
 ) {
 
@@ -156,6 +160,9 @@ class ViajeRepository(
 
     suspend fun obtenerUbicacionPorIp(ip: String): UbicacionUsuario =
         ipGeolocationApi.getLocationByIp(ip).toDomain()
+
+    suspend fun obtenerPersonajes(): List<Personaje> =
+        rickAndMortyApi.getCharacters().results.orEmpty().map { it.toDomain() }
 
     private suspend fun monedaPrincipal(codigoPais: String): Moneda =
         obtenerPais(codigoPais).monedas.firstOrNull()
